@@ -4,6 +4,6 @@ Base on the paper study :([http://yats.free.fr/doc/cointegration-en.pdf](https:/
 
 Sorce Code: [Open sp500_HMM.py](sp500_HMM.py)
 
-![image](<img width="1236" height="830" alt="image" src="https://github.com/user-attachments/assets/7e1bcf9f-fa0f-4e8b-8c14-540cecb292a2" />
-)
+<img width="1236" height="830" alt="image" src="https://github.com/user-attachments/assets/2c548a73-0d44-47f0-bab9-7635f5c45c99" />
+
 
