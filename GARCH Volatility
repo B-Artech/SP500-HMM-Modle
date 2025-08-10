@@ -1,0 +1,50 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import yfinance as yf
+from arch import arch_model
+
+# Parameters
+symbol = "^GSPC"  # S&P 500 index
+start_date = "2019-01-01"
+end_date = "2025-08-01"
+
+# Fetch S&P 500 data
+data = yf.download(symbol, start=start_date, end=end_date, interval="1d")
+if isinstance(data.columns, pd.MultiIndex):
+    data.columns = data.columns.droplevel(1)  # drop multi-index if present
+
+# Compute log returns
+data["Log_Returns"] = np.log(data["Close"] / data["Close"].shift(1))
+log_returns = data["Log_Returns"].dropna()
+
+# Fit GARCH(1,1) model
+model = arch_model(log_returns, vol='GARCH', p=1, q=1)
+res = model.fit(disp="off")
+
+# Extract daily conditional volatility
+garch_vol = res.conditional_volatility
+
+# Annualize volatility
+annual_garch_vol = garch_vol * np.sqrt(252)
+
+# 30-day rolling average
+volatility_index = annual_garch_vol
+average30_day = volatility_index.rolling(30).mean()
+
+# Plot results
+plt.figure(figsize=(12, 6))
+plt.plot(volatility_index, label="S&P 500 Volatility (GARCH)", color='red', linewidth=2)
+plt.plot(average30_day, label="30-Day Average", color='blue', linewidth=2)
+
+# Date formatting
+plt.gca().xaxis.set_major_locator(mdates.YearLocator())  
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y'))  
+
+plt.title(f"S&P 500 Volatility (GARCH) - Latest: {volatility_index.iloc[-1]:.2f}, Avg: {average30_day.iloc[-1]:.2f}")
+plt.xlabel("Date")
+plt.ylabel("Annualized Volatility")
+plt.legend()
+plt.grid(True)
+plt.show()
