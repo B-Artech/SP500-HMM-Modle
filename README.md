@@ -6,4 +6,5 @@ Sorce Code: [Open sp500_HMM.py](sp500_HMM.py)
 
 Date: 2019-04 - 2026-03
 
-![image alt](https://github.com/B-Artech/SP500-HMM-Modle/blob/main/Screenshot%202026-03-14%20174706.jpg)
+![image alt](<img width="1472" height="847" alt="image" src="https://github.com/user-attachments/assets/212a91ac-311d-4bae-8d66-63d844d1beaa" />
+)
