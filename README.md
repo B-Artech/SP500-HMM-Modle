@@ -4,6 +4,4 @@ Base on the paper study :([http://yats.free.fr/doc/cointegration-en.pdf](https:/
 
 Sorce Code: [Open sp500_HMM.py](sp500_HMM.py)
 
-Date: 2019-04 - 2026-03
-
 ![image alt]()
